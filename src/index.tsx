@@ -3,13 +3,43 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import About from './pages/About/About';
+import Movies from './pages/Movies/Movies';
+import store from './store/store'
+import { Provider } from 'react-redux';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: (
+      <Provider store={store}>
+        <App/>
+      </Provider>
+    ),
+    children: [
+      {
+        path: "/about",
+        element: <About/>
+      },
+      {
+        path: "/movies",
+        element: <Movies/>
+      }
+    ]
+  },
+  
+]);
+
+
 root.render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router}/>
+    
   </React.StrictMode>
 );
 
