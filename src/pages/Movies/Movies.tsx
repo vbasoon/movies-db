@@ -1,6 +1,7 @@
 import { Movie } from "../../store/reducers/movies";
 import { connect } from "react-redux";
 import { RootState } from "../../store/store";
+import MovieCard from "./MovieCard";
 
 
 interface MoviesProps {
@@ -13,9 +14,7 @@ function Movies({movies}: MoviesProps) {
       <ul>
         {movies.map((m)=>(
           <li key={m.id}>
-            <div>{m.title}</div>
-            <div>{m.overview}</div>
-            <div>{m.popularity}</div>
+            <MovieCard title={m.title} overview={m.overview} popularity={m.popularity}/>
           </li>
         ))}
       </ul>
