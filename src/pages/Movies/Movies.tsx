@@ -10,15 +10,19 @@ interface MoviesProps {
 
 function Movies({movies}: MoviesProps) {
   return (
-    <div>
-      <ul>
+    <section>
+      <div>
         {movies.map((m)=>(
-          <li key={m.id}>
-            <MovieCard title={m.title} overview={m.overview} popularity={m.popularity}/>
-          </li>
+          <MovieCard
+              key = {m.id}
+              id={m.id} 
+              title={m.title} 
+              overview={m.overview} 
+              popularity={m.popularity}
+          />
         ))}
-      </ul>
-    </div>
+      </div>
+    </section>
   )
 }
 
