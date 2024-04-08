@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { RootState } from "../../store/store";
 import MovieCard from "./MovieCard";
 
+import './Movies.css'
 
 interface MoviesProps {
   movies: Movie[]
@@ -10,8 +11,8 @@ interface MoviesProps {
 
 function Movies({movies}: MoviesProps) {
   return (
-    <section>
-      <div>
+    <section className="Movies">
+      <div className="movies__list">
         {movies.map((m)=>(
           <MovieCard
               key = {m.id}
