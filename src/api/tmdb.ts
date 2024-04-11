@@ -24,10 +24,17 @@ interface MovieDetails {
   popularity: number,
 }
 
+interface PageResponse<TResult> {
+  page: number,
+  results: TResult[],
+}
+
 export const client = {
   async getPlayNow(): Promise<MovieDetails[]>  {
   
-  return get("/movie/now_playing?page=1")
+  const response = await get<PageResponse<MovieDetails>>("/movie/now_playing?page=1")
+
+  return response.results
     
 }
 }
