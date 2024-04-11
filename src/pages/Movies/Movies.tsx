@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { RootState } from "../../store/store";
 import MovieCard from "./MovieCard";
 import styles from "./Movies.module.scss"
+import { useEffect, useState } from "react";
+import { client } from "../../api/tmdb" 
 
 import './Movies.css'
-import { useEffect, useState } from "react";
 
 async function getPlayNow()  {
   const options = {
