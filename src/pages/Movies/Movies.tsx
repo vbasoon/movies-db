@@ -24,7 +24,7 @@ async function getPlayNow()  {
     
 }
 
-function MoviesFetch() {
+export function MoviesFetch() {
   const [movies, setMovies] = useState([]);
   useEffect(() => {
     async function loadData() {
