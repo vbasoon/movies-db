@@ -31,6 +31,14 @@
       margin-top: 0.5rem;
       font-weight: bold;
     }
+
+    @media (max-width: 767px) {
+      padding: 0.5rem;
+    }
+  }
+
+  @media (max-width: 767px) {
+    margin: 0.5rem;
   }
 }
 

@@ -1,13 +1,14 @@
-.App {
+/* .App {
   text-align: center;
   display: flex;
   flex-direction: column;
   background-color: #282c34;
+  min-height: 100vh;
 }
 
 .App-logo {
   height: 40vmin;
-  /* height: 5vmin; */
+  /* height: 5vmin; 
   pointer-events: none;
 }
 
@@ -43,4 +44,4 @@
   to {
     transform: rotate(360deg);
   }
-}
+} */

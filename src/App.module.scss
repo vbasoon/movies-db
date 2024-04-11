@@ -1,0 +1,59 @@
+@use "./styles/shared";
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #282c34;
+  
+}
+
+.logo {
+  height: 18vmin;
+  padding: 1rem;
+  filter: invert(1);
+
+  @media (max-width: 767px) {
+      padding: 0.5rem;
+      max-height: 100px;
+    }
+}
+
+// @media (prefers-reduced-motion: no-preference) {
+//   .App-logo {
+//     animation: App-logo-spin infinite 20s linear;
+//   }
+// }
+
+.header {
+  min-height: 10vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: shared.$primary-color;
+
+  .menu {
+    &__list {
+      list-style-type: none;
+    }
+
+    &__item {
+      display: inline-block;
+      margin-right: 1rem;
+    }
+    
+    .menu__link {
+      color: shared.$link-color;
+    }
+  }
+}
+
+.main {
+  min-height: 98vh;
+  color: shared.$primary-color;
+  padding: 1rem;
+}
+
+
