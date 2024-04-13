@@ -5,7 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import About from './pages/About/About';
-import Movies, { MoviesFetch } from './pages/Movies/Movies';
+import { MoviesFetch } from './pages/Movies/Movies';
 import store from './store/store'
 import { Provider } from 'react-redux';
 

@@ -4,22 +4,37 @@ import { RootState } from "../../store/store";
 import MovieCard from "./MovieCard";
 import styles from "./Movies.module.scss"
 import { useEffect, useState } from "react";
-import { client } from "../../api/tmdb" 
+import { MovieDetails, client } from "../../api/tmdb"
+
 
 import './Movies.css'
 
 // to UP
 
 export function MoviesFetch() {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState<MovieDetails[]>([]);
   useEffect(() => {
     async function loadData() {
+      const config = await client.getConfiguration()
+      const imageUrl = config.images.base_url;
       const results = await client.getPlayNow();
-      setMovies(results)
+
+      const mappedResults: Movie[] = results.map((m)=> ({
+        id: m.id,
+        title: m.title,
+        overview: m.overview,
+        popularity: m.popularity,
+        image: m.backdrop_path 
+          ? `${imageUrl}w780${m.backdrop_path}` 
+          : undefined,
+      }));
+
+      setMovies(mappedResults);
     }
 
-  loadData();
-  }, [])
+    loadData();
+  }, []);
+
   return <Movies movies={movies} />
 }
 
@@ -42,6 +57,7 @@ function Movies({movies}: MoviesProps) {
               title={m.title} 
               overview={m.overview} 
               popularity={m.popularity}
+              image={m.image}
           />
         ))}
       </div>

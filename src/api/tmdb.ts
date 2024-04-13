@@ -1,6 +1,6 @@
 import configuration from "../configuration"
 
-async function get<TBody>(relativeURL: string): Promise<TBody> {
+async function get<TBody>(relativeUrl: string): Promise<TBody> {
   const options = {
         method: 'GET',
         headers: {
@@ -10,18 +10,19 @@ async function get<TBody>(relativeURL: string): Promise<TBody> {
   };
 
   const response = await fetch(
-    `${configuration.apiUrl}/3${relativeURL}`, options);
+    `${configuration.apiUrl}/3${relativeUrl}`, options);
 
   const json: TBody = await response.json()
 
   return json;
 }
 
-interface MovieDetails {
+export interface MovieDetails {
   id: number,
   title: string,
   overview: string,
   popularity: number,
+  backdrop_path?: string,
 }
 
 interface PageResponse<TResult> {
@@ -29,12 +30,25 @@ interface PageResponse<TResult> {
   results: TResult[],
 }
 
-export const client = {
-  async getPlayNow(): Promise<MovieDetails[]>  {
-  
-  const response = await get<PageResponse<MovieDetails>>("/movie/now_playing?page=1")
+// Add interface Configuration
 
-  return response.results
+interface Configuration {
+  images: {
+    base_url: string;
+  }
+}
+
+export const client = {
+
+  async getConfiguration() {
+    return get<Configuration>("/configuration");
+  },
+  async getPlayNow(): Promise<MovieDetails[]>  {
+    const response = await get<PageResponse<MovieDetails>>(
+      "/movie/now_playing?page=1"
+    );
+
+    return response.results
     
   }
 }
