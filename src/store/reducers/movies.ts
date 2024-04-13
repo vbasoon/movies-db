@@ -21,8 +21,31 @@ const initialState: MovieState = {
   ],
 }
 
-const moviesReducer: Reducer<MovieState, Action> = (state, action) => {
-  return initialState;
+export const moviesLoaded = (movies: Movie[]) => ({
+  type: "movies/loaded",
+  payload: movies
+})
+
+interface ActionWithPayload<T> extends Action {
+  payload: T
+}
+
+export const moviesReducer: Reducer<MovieState, ActionWithPayload<Movie[]>> = (state, action) => {
+  const currentState = state ?? initialState
+
+  switch (action.type) {
+    case "movies/loaded":
+      return {
+        ...currentState, // потрібно розширити поточний стан, для currentState робимо за допомогою spred оператора
+        top: action.payload // властивість top, яка відповідає за список фільмів, додати action payload
+      }
+      
+  
+    default:
+      return currentState;
+      
+  }
+  
 }
 
 export default moviesReducer

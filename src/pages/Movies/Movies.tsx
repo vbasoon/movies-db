@@ -1,18 +1,20 @@
-import { Movie } from "../../store/reducers/movies";
-import { connect } from "react-redux";
+import { Movie, moviesLoaded } from "../../store/reducers/movies";
+import { connect, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import MovieCard from "./MovieCard";
 import styles from "./Movies.module.scss"
-import { useEffect, useState } from "react";
-import { MovieDetails, client } from "../../api/tmdb"
-
+import { useEffect } from "react";
+import { client } from "../../api/tmdb"
 
 import './Movies.css'
 
-// to UP
+interface MoviesProps {
+  movies: Movie[]
+}
 
-export function MoviesFetch() {
-  const [movies, setMovies] = useState<MovieDetails[]>([]);
+function Movies({movies}: MoviesProps) {
+
+  const dispatch  = useDispatch();
   useEffect(() => {
     async function loadData() {
       const config = await client.getConfiguration()
@@ -29,24 +31,11 @@ export function MoviesFetch() {
           : undefined,
       }));
 
-      setMovies(mappedResults);
+      dispatch(moviesLoaded(mappedResults));
     }
 
     loadData();
-  }, []);
-
-  return <Movies movies={movies} />
-}
-
-// To UP
-
-interface MoviesProps {
-  movies: Movie[]
-}
-
-
-
-function Movies({movies}: MoviesProps) {
+  }, [dispatch]);
   return (
     <section className="Movies">
       <div className={styles.list}>
