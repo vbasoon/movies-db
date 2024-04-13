@@ -4,7 +4,7 @@ async function get<TBody>(relativeURL: string): Promise<TBody> {
   const options = {
         method: 'GET',
         headers: {
-        accept: 'application/json',
+          accept: 'application/json',
           Authorization: `Bearer ${configuration.apiTkn}`
         }
   };
@@ -36,5 +36,8 @@ export const client = {
 
   return response.results
     
+  }
 }
-}
+
+
+
