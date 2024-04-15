@@ -1,29 +1,44 @@
 import React from 'react';
 import styles from './App.module.scss';
-import { Link, Outlet } from 'react-router-dom';
-import { CssBaseline } from '@mui/material';
+import { Link as RouterLink, Outlet } from 'react-router-dom';
+import { AppBar, CssBaseline, Link, Toolbar } from '@mui/material';
+import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+
+function HeaderLink({
+  children, 
+  to,
+}: {
+  to: string, 
+  children: React.ReactNode;
+}) {
+  return (
+    <Link 
+      component={RouterLink} 
+      to={to}
+      variant="button"
+      color="inherit"
+      sx={{ my: 1, mx: 1.5}}
+    >
+      {children}
+    </Link>
+  );
+}
 
 function App() {
   return (
+    
     <div>
       <CssBaseline/>
-      <header className={styles.header}>
-        <img src="/cinema-ico.png" className={styles.logo} alt="logo" />
-        <nav className={styles.menu}>
-          <ul className={styles.menu__list}>
-          <li className={styles.menu__item}>
-            <Link className={styles.menu__link} to="/">Home</Link>
-          </li>
-          <li className={styles.menu__item}>
-            <Link className={styles.menu__link} to="/about">About</Link>
-          </li>
-          <li className={styles.menu__item}>
-            <Link className={styles.menu__link} to="/movies">Movies</Link>
-          </li>
-        </ul>
+      <AppBar>
+      <Toolbar>
+        <LiveTvOutlinedIcon sx={{ mr: 5}} />
+        <nav>
+            <HeaderLink to="/">Home</HeaderLink>
+            <HeaderLink to="/about">About</HeaderLink>
+            <HeaderLink to="/movies">Movies</HeaderLink>
         </nav>
-        
-      </header>
+      </Toolbar>
+      </AppBar>
       <main className={styles.main}>
         <Outlet/>
       </main>
