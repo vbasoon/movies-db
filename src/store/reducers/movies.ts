@@ -12,12 +12,12 @@ export interface Movie {
 
 interface MovieState {
   top: Movie[],
-  loading: boolean,
+  loading: boolean, //1
 }
 
 const initialState: MovieState = {
   top: [],
-    loading: false,
+  loading: false,
 }
 
 export const moviesLoading = () => ({ // 1.Action creator & Action
@@ -36,7 +36,7 @@ const moviesReducer = createReducer<MovieState>(
       return {
         ...state, // потрібно розширити поточний стан, для currentState робимо за допомогою spred оператора
         top: action.payload, // властивість top, яка відповідає за список фільмів, додати action payload
-        loading: true
+        loading: false
       }
     },
     "movies/loading": (state, action) => {

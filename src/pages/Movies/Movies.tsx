@@ -9,10 +9,11 @@ import { client } from "../../api/tmdb"
 import './Movies.css'
 
 interface MoviesProps {
-  movies: Movie[]
+  movies: Movie[],
+  loading: boolean,
 }
 
-function Movies({movies}: MoviesProps) {
+function Movies({movies, loading}: MoviesProps) {
 
   const dispatch  = useDispatch();
   useEffect(() => {
@@ -41,23 +42,27 @@ function Movies({movies}: MoviesProps) {
   return (
     <section className="Movies">
       <div className={styles.list}>
-        {movies.map((m)=>(
-          <MovieCard
-              key = {m.id}
-              id={m.id} 
-              title={m.title} 
-              overview={m.overview} 
-              popularity={m.popularity}
-              image={m.image}
-          />
-        ))}
+        {loading ? (
+          <h3>Loading...</h3>
+          ) : (
+            movies.map((m)=>(
+              <MovieCard
+                  id={m.id} 
+                  title={m.title} 
+                  overview={m.overview} 
+                  popularity={m.popularity}
+                  image={m.image}
+              />
+        ))
+        )}
       </div>
     </section>
   )
 }
 
 const mapStateToProps = ( state: RootState) => ({
-  movies: state.movies.top
+  movies: state.movies.top,
+  loading: state.movies.loading,
 })
 
 const connector = connect(mapStateToProps);
