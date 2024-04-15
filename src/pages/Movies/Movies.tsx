@@ -28,6 +28,7 @@ function Movies({movies, loading}: MoviesProps) {
           ) : (
             movies.map((m)=>(
               <MovieCard
+                  key={m.id}
                   id={m.id} 
                   title={m.title} 
                   overview={m.overview} 

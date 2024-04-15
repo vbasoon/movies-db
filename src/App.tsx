@@ -1,10 +1,12 @@
 import React from 'react';
 import styles from './App.module.scss';
 import { Link, Outlet } from 'react-router-dom';
+import { CssBaseline } from '@mui/material';
 
 function App() {
   return (
-    <div className={styles.app}>
+    <div>
+      <CssBaseline/>
       <header className={styles.header}>
         <img src="/cinema-ico.png" className={styles.logo} alt="logo" />
         <nav className={styles.menu}>
