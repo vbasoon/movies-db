@@ -22,11 +22,11 @@ const initialState: MovieState = {
   loading: false,
 }
 
-export const moviesLoading = () => ({ // 1.Action creator & Action
+const moviesLoading = () => ({ // 1.Action creator & Action
   type: "movies/loading",
 })
 
-export const moviesLoaded = (movies: Movie[]) => ({ // 1.Action creator & Action
+const moviesLoaded = (movies: Movie[]) => ({ // 1.Action creator & Action
   type: "movies/loaded",
   payload: movies
 })
@@ -43,13 +43,11 @@ export function fetchMovies (): AppThunk<Promise<void>> {
         title: m.title,
         overview: m.overview,
         popularity: m.popularity,
-        image: m.backdrop_path 
-          ? `${imageUrl}w780${m.backdrop_path}` 
-          : undefined,
+        image: m.backdrop_path ? `${imageUrl}w780${m.backdrop_path}` : undefined,
       }));
 
       dispatch(moviesLoaded(mappedResults)); // dispatch loaded
-  }
+  };
 }
 
 const moviesReducer = createReducer<MovieState>(
