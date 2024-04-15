@@ -1,3 +1,5 @@
+import { ActionWithPayload } from './../../redux/utils';
+import { createReducer } from '../../redux/utils';
 import { Reducer, Action } from "redux";
 
 export interface Movie {
@@ -21,31 +23,22 @@ const initialState: MovieState = {
   ],
 }
 
-export const moviesLoaded = (movies: Movie[]) => ({
+export const moviesLoaded = (movies: Movie[]) => ({ // 1.Action creator & Action
   type: "movies/loaded",
   payload: movies
 })
 
-interface ActionWithPayload<T> extends Action {
-  payload: T
-}
-
-export const moviesReducer: Reducer<MovieState, ActionWithPayload<Movie[]>> = (state, action) => {
-  const currentState = state ?? initialState
-
-  switch (action.type) {
-    case "movies/loaded":
+const moviesReducer = createReducer<MovieState>(
+  initialState,
+  {
+    "movies/loaded": (state, action: ActionWithPayload<Movie[]>) => {
       return {
-        ...currentState, // потрібно розширити поточний стан, для currentState робимо за допомогою spred оператора
+        ...state, // потрібно розширити поточний стан, для currentState робимо за допомогою spred оператора
         top: action.payload // властивість top, яка відповідає за список фільмів, додати action payload
       }
-      
-  
-    default:
-      return currentState;
-      
+    }
   }
-  
-}
+)
+
 
 export default moviesReducer

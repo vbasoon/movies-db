@@ -36,6 +36,7 @@ function Movies({movies}: MoviesProps) {
 
     loadData();
   }, [dispatch]);
+  
   return (
     <section className="Movies">
       <div className={styles.list}>
