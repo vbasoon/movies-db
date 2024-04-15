@@ -1,4 +1,4 @@
-import { Movie, moviesLoaded } from "../../store/reducers/movies";
+import { Movie, moviesLoaded, moviesLoading } from "../../store/reducers/movies";
 import { connect, useDispatch } from "react-redux";
 import { RootState } from "../../store/store";
 import MovieCard from "./MovieCard";
@@ -16,7 +16,8 @@ function Movies({movies}: MoviesProps) {
 
   const dispatch  = useDispatch();
   useEffect(() => {
-    async function loadData() {
+    async function loadData() { // Load data
+      dispatch(moviesLoading())
       const config = await client.getConfiguration()
       const imageUrl = config.images.base_url;
       const results = await client.getPlayNow();
@@ -31,12 +32,12 @@ function Movies({movies}: MoviesProps) {
           : undefined,
       }));
 
-      dispatch(moviesLoaded(mappedResults));
+      dispatch(moviesLoaded(mappedResults)); // dispatch loaded
     }
 
     loadData();
   }, [dispatch]);
-  
+
   return (
     <section className="Movies">
       <div className={styles.list}>

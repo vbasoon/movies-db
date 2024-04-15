@@ -11,17 +11,18 @@ export interface Movie {
 }
 
 interface MovieState {
-  top: Movie[]
+  top: Movie[],
+  loading: boolean,
 }
 
 const initialState: MovieState = {
-  top: [
-    { id: 1, title: "Inception", popularity: 98, overview: "Dreams..."},
-    { id: 2, title: "The GodFather", popularity: 97, overview: "GodFather..."},
-    { id: 3, title: "The Dark Knight", popularity: 96.5, overview: "Batman..."},
-    { id: 4, title: "The GodFather Part II", popularity: 96, overview: "Part II..."},
-  ],
+  top: [],
+    loading: false,
 }
+
+export const moviesLoading = () => ({ // 1.Action creator & Action
+  type: "movies/loading",
+})
 
 export const moviesLoaded = (movies: Movie[]) => ({ // 1.Action creator & Action
   type: "movies/loaded",
@@ -34,7 +35,14 @@ const moviesReducer = createReducer<MovieState>(
     "movies/loaded": (state, action: ActionWithPayload<Movie[]>) => {
       return {
         ...state, // потрібно розширити поточний стан, для currentState робимо за допомогою spred оператора
-        top: action.payload // властивість top, яка відповідає за список фільмів, додати action payload
+        top: action.payload, // властивість top, яка відповідає за список фільмів, додати action payload
+        loading: true
+      }
+    },
+    "movies/loading": (state, action) => {
+      return {
+        ...state,
+        loading: true,
       }
     }
   }
