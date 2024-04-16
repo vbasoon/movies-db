@@ -10,6 +10,14 @@ const Copyright = () => {
 }
 
 export const Home = () => {
+  const loggedIn = true;
+  const userName = 'Vlad';
+  const greeting = loggedIn
+    ? `${userName}, explore movies today with us!`
+    : `Explore movies today with us!`
+
+
+
   return (
     <Box sx={{ bgcolor: "background.paper", pt: 8, pb: 8}}>
       <Container maxWidth="sm">
@@ -26,7 +34,7 @@ export const Home = () => {
           align="center" 
           color="text.secondary"
           paragraph>
-          Explore movies today with us!
+          {greeting}
         </Typography>
         <Stack 
           sx={{ pt: 4}} 

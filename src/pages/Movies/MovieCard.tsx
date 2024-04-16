@@ -1,7 +1,15 @@
 import { Link as RouterLink } from "react-router-dom"
 // import styles from "./MovieCard.module.scss"
-import { Button, Card, CardActions, CardContent, CardMedia, Typography } from "@mui/material"
-//import { Button } from "@mui/base"
+import { 
+  Button, 
+  Card, 
+  CardActions, 
+  CardContent, 
+  CardMedia, 
+  IconButton, 
+  Typography,
+} from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 interface MovieCardProps {
   id: number,
@@ -35,7 +43,11 @@ export function MovieCard({
           <Button component={RouterLink} to={`/movies/${id}`}>
             Details
           </Button>
+          <IconButton>
+            <FavoriteIcon/>
+          </IconButton>
         </CardActions>
+        
     </Card>
   )
 }
