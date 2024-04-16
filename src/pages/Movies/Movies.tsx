@@ -21,7 +21,7 @@ function Movies({movies, loading}: MoviesProps) {
 
   return (
     <Container sx={{py: 10}} maxWidth="lg">
-      <Typography variant="h4" align="center">Now playing</Typography>
+      <Typography variant="h4" align="center" gutterBottom>Now playing</Typography>
    
         {loading ? (
           <LinearProgress color="secondary"/>

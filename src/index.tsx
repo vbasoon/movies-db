@@ -4,6 +4,7 @@ import './index.scss';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import Home from './pages/Home/Home';
 import About from './pages/About/About';
 import Movies from './pages/Movies/Movies';
 import store from './store/store'
@@ -13,15 +14,23 @@ const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 
+function AppEntrypoint() {
+  return (
+    <Provider store={store}>
+        <App/>
+      </Provider>
+  )
+}
+
 const router = createBrowserRouter([
   {
     path: "/",
-    element: (
-      <Provider store={store}>
-        <App/>
-      </Provider>
-    ),
+    element: <AppEntrypoint/>,
     children: [
+      {
+        path: "/",
+        element: <Home/>
+      },
       {
         path: "/about",
         element: <About/>
