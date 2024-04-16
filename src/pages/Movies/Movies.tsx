@@ -14,6 +14,8 @@ interface MoviesProps {
 
 function Movies({movies, loading}: MoviesProps) {
 
+  const loggedIn = true;
+  
   const dispatch  = useAppDispatch();
   useEffect(() => {
     dispatch(fetchMovies())
@@ -35,6 +37,7 @@ function Movies({movies, loading}: MoviesProps) {
                     overview={m.overview} 
                     popularity={m.popularity}
                     image={m.image}
+                    enableUserActions={loggedIn}
                 />
               </Grid>
         ))}
