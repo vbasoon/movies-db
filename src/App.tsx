@@ -1,8 +1,17 @@
 import React from 'react';
 import styles from './App.module.scss';
 import { Link as RouterLink, Outlet } from 'react-router-dom';
-import { AppBar, CssBaseline, Link, Toolbar } from '@mui/material';
+import {
+   AppBar, 
+   CssBaseline, 
+   Link, 
+   ThemeProvider, 
+   Toolbar, 
+   Typography, 
+   createTheme 
+  } from '@mui/material';
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+import { teal } from '@mui/material/colors';
 
 function HeaderLink({
   children, 
@@ -24,14 +33,26 @@ function HeaderLink({
   );
 }
 
+const defaultTheme = createTheme({
+  palette: {
+    primary: teal,
+    secondary: {
+      main: "#96800f"
+    }
+  }
+})
+
 function App() {
   return (
-    
+    <ThemeProvider theme={defaultTheme}>
     <div>
       <CssBaseline/>
       <AppBar>
       <Toolbar>
         <LiveTvOutlinedIcon sx={{ mr: 5}} />
+        <Typography variant='h6' color="inherit" noWrap>
+          TMDB
+        </Typography>
         <nav>
             <HeaderLink to="/">Home</HeaderLink>
             <HeaderLink to="/about">About</HeaderLink>
@@ -39,10 +60,11 @@ function App() {
         </nav>
       </Toolbar>
       </AppBar>
-      <main className={styles.main}>
+      <main>
         <Outlet/>
       </main>
     </div>
+    </ThemeProvider>
   );
 }
 
