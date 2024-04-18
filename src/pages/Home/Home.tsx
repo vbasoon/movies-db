@@ -1,5 +1,7 @@
 import { Box, Button, Container, Stack, Typography } from '@mui/material'
+import { useContext } from 'react'
 import { Link as RouterLink} from 'react-router-dom'
+import { AuthContext, Guest } from '../../components/AuthContext'
 
 const Copyright = () => {
   return (
@@ -10,10 +12,12 @@ const Copyright = () => {
 }
 
 export const Home = () => {
-  const loggedIn = true;
-  const userName = 'Vlad';
+  const { user } = useContext(AuthContext);
+  const loggedIn = user !== Guest
+  // const loggedIn = true; //hardcode
+  // const userName = 'Vlad'; // hardcode
   const greeting = loggedIn
-    ? `${userName}, explore movies today with us!`
+    ? `${user.name}, explore movies today with us!`
     : `Explore movies today with us!`
 
 

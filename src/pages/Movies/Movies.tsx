@@ -2,10 +2,11 @@ import { Movie, fetchMovies } from "../../store/reducers/movies";
 import { connect } from "react-redux";
 import { RootState } from "../../store/store";
 import MovieCard from "./MovieCard";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useAppDispatch } from "../../hooks";
 import { Container } from "@mui/system"
 import { Grid, LinearProgress, Typography } from "@mui/material";
+import { AuthContext, Guest } from "../../components/AuthContext";
 
 interface MoviesProps {
   movies: Movie[],
@@ -14,9 +15,13 @@ interface MoviesProps {
 
 function Movies({movies, loading}: MoviesProps) {
 
-  const loggedIn = true;
+  // const loggedIn = true;
   
   const dispatch  = useAppDispatch();
+
+  const { user } = useContext(AuthContext);
+  const loggedIn = user !== Guest
+  
   useEffect(() => {
     dispatch(fetchMovies())
   }, [dispatch]);

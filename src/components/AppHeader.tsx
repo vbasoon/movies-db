@@ -1,6 +1,8 @@
 import { AppBar, Box, Button, Link, Toolbar, Typography, } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import LiveTvOutlinedIcon from '@mui/icons-material/LiveTvOutlined';
+import { useContext } from 'react';
+import { AuthContext, Guest } from './AuthContext';
 
 function HeaderLink({ children, to, }: { to: string, children: React.ReactNode; }) {
   return (
@@ -10,8 +12,12 @@ function HeaderLink({ children, to, }: { to: string, children: React.ReactNode; 
   );
 }
 
+interface AppHeaderProps {
+  onLogin(): void,
+  onLogout(): void,
+}
 
-const AppHeader = () => {
+const AppHeader = ({onLogin, onLogout}: AppHeaderProps) => {
   return (
     <AppBar position='static'>
       <Toolbar>
@@ -26,26 +32,39 @@ const AppHeader = () => {
               <HeaderLink to="/movies">Movies</HeaderLink>
           </nav>
         </Box>
-        <AuthSection/>
+        <AuthSection 
+          onLogin={onLogin} 
+          onLogout={onLogout}
+        />
       </Toolbar>
     </AppBar>
   )
 }
 
-function AuthSection() {
-  const loggedIn = true;
-  const userName = 'Vlad';
+interface AuthSectionProps {
+  onLogin(): void,
+  onLogout(): void,
+}
+
+function AuthSection({onLogin, onLogout} : AuthSectionProps) {
+  const auth = useContext(AuthContext);
+  const loggedIn = auth.user !== Guest
+
+  
+
+  // const loggedIn = true;
+  // const userName = 'Vlad';
 
   if (loggedIn) {
     return (
       <>
-        <Typography>Hello, {userName}!</Typography>
-        <Button color="inherit" variant="outlined" sx={{ ml: 1.5}}>Log in</Button>
+        <Typography>Hello, {auth.user.name}!</Typography>
+        <Button color="inherit" variant="outlined" onClick={onLogout} sx={{ ml: 1.5}}>Log out</Button>
       </>
     )
   } 
     
-  return <Button color="inherit" variant="outlined">Log in</Button>
+  return <Button color="inherit" variant="outlined" onClick={onLogin}>Log in</Button>
 }
 
 export default AppHeader

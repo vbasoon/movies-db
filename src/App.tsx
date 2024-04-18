@@ -2,6 +2,8 @@ import { Outlet } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import { teal } from '@mui/material/colors';
 import AppHeader from './components/AppHeader';
+import { AuthContext, AuthInfo, Guest } from './components/AuthContext';
+import { useState } from 'react';
 
 
 const defaultTheme = createTheme({
@@ -13,16 +15,27 @@ const defaultTheme = createTheme({
   }
 })
 
+const fakeAuth = {
+  user: {
+    name: 'Supervisor'
+  }
+}
+
 function App() {
+
+  const[auth, setAuth] = useState<AuthInfo>({ user: Guest})
   return (
     <ThemeProvider theme={defaultTheme}>
-    <div>
+    
       <CssBaseline/>
-      <AppHeader />
+      <AuthContext.Provider value={auth}>
+        <AppHeader onLogin={() => setAuth(fakeAuth)} onLogout={() => setAuth({ user: Guest})}/>
       <main>
         <Outlet/>
       </main>
-    </div>
+      </AuthContext.Provider>
+      
+    
     </ThemeProvider>
   );
 }
