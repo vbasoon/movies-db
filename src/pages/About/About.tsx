@@ -1,8 +1,14 @@
 import React from 'react'
+import CountdownText from '../../components/CountdownText'
+import CountdownVideo from '../../components/CoundownVideo'
+import { Container } from '@mui/material'
 
 const About = () => {
   return (
-    <div>Comming soon...</div>
+    <Container sx={{py: 8}}>
+    <CountdownText/>
+    <CountdownVideo/>
+    </Container>
   )
 }
 
